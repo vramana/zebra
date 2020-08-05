@@ -62,8 +62,7 @@ pub struct Verifier {
 impl Default for Verifier {
     fn default() -> Self {
         let batch = batch::Verifier::default();
-        // XXX(hdevalence) what's a reasonable choice here?
-        let (tx, _) = channel(10);
+        let (tx, _) = channel(super::BROADCAST_BUFFER_SIZE);
         Self { tx, batch }
     }
 }
@@ -90,8 +89,8 @@ impl Service<BatchControl<Item>> for Verifier {
                     match rx.recv().await {
                         Ok(result) => result,
                         Err(RecvError::Lagged(_)) => {
-                            tracing::warn!(
-                                "missed channel updates for the correct signature batch!"
+                            tracing::error!(
+                                "missed channel updates, BROADCAST_BUFFER_SIZE is too low!!"
                             );
                             Err(Error::InvalidSignature)
                         }

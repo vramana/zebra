@@ -10,6 +10,8 @@ chrono = "0.4.13"
 color-eyre = "0.5"
 rand = "0.7"
 redjubjub = "0.2"
+bellman = "0.6"
+pairing = "0.16"
 
 metrics = "0.12"
 futures = "0.3.5"

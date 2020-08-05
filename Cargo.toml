@@ -19,3 +19,7 @@ panic = "abort"
 
 [profile.release]
 panic = "abort"
+
+[patch.crates-io]
+bellman = { git = "https://github.com/zcashfoundation/librustzcash.git", branch = "batch-bellman" }
+pairing = { git = "https://github.com/zcashfoundation/librustzcash.git", branch = "batch-bellman" }
